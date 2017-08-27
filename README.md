@@ -26,6 +26,11 @@ model.fit_generator(tri_gen.triplet_flow(batch_size),
 ...
 ```
 
+# contribution
+- Any contribution (bug report, advice, rewrited code, etc) is welcome and help me a lot. 
+- It is not confirmed that the code reproduce the original paper result or not.
+- English, Deutsch, and 日本語 OK.
+
 # original implementation
 
     https://github.com/davidsandberg/facenet
