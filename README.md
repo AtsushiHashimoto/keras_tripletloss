@@ -3,7 +3,7 @@ an implementation of tripletloss for keras (with tensorflow backend)
 
 # usage
 
-'''
+```
 ...
 from triplet_generator import TripletGenerator, make_triplet_loss_func, bpr_triplet_loss
 
@@ -24,7 +24,7 @@ model.fit_generator(tri_gen.triplet_flow(batch_size),
                     validation_steps=vsteps, 
                     epochs=epochs)
 ...
-'''
+```
 
 # original implementation
 
