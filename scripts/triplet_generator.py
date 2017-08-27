@@ -8,6 +8,12 @@ import multiprocessing
 import itertools
 from functools import reduce
 
+def shuffle_arrays(arrays, random_seed=np.random.randint(100000)):
+    for ar in arrays:        
+        np.random.seed(random_seed)        
+        np.random.shuffle(ar)
+
+
 def make_triplet_loss_func(alpha):
     def triplet_loss(y_true, y_pred):
         # project features on a hyper-sphere.
@@ -40,18 +46,22 @@ def flatten(array):
     return [item for sublist in array for item in sublist]
 class TripletGenerator:
     u"""flowを受け取ってtripletにしていくGenerator & loss関数"""
-    def __init__(self, base_flow, model, n_jobs=multiprocessing.cpu_count()):
+    def __init__(self, base_flow,  model, alpha=0.2, n_jobs=multiprocessing.cpu_count()):
         self.base_flow = base_flow
+        self.model = model
+        self.alpha = alpha
+        self.n_jobs = n_jobs
+
         self.triplet_buf = None
         self.y_buf = None
-        self.model = model
-        self.n_jobs = n_jobs
-        self.X_stack=[]
-        self.y_stack=[]
+
         
-        # initialize model(?)
-        #X, _ = next(base_flow)
-        #_ = model4triplet.predict(X)
+        #self.X_stack=[]
+        #self.y_stack=[]
+        
+        # initialize model and flow(?)
+        self.X_stack, self.y_stack = next(base_flow)
+        _ = self.model.predict(self.X_stack)
 
         
     
